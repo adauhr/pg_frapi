@@ -1,7 +1,7 @@
-#Pg_frapi
+#pg_frapi
 ===============
 
-Une collection de fonction postgresql native qui définnisent un mappage et permettent d'interroger une séléction d'API mise à disposition par les diverses administration françaises.
+Une collection de fonction postgresql native qui définissent un mappage et permettent d'interroger une séléction d'API mise à disposition par les diverses administrations françaises.
 Ce projet est encore en gestation et n'est pas encore stable ni même opérationel. Nous avons cependant fait le choix de dévelloper cette de manière totalement ouverte dans l'esprit de la loi sur la modernisation numérique.
 
 ##Objectifs
