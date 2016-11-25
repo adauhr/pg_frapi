@@ -8,6 +8,7 @@ Ce projet est encore en gestation et n'est pas encore stable ni même opération
 ###Version 0.1
 * Proposer une implémentation simple pour l'API adresse.gouv.fr
 * Proposer une implémentation simple pour l'API ign
+
 ###Version 0.2
 * Statbiliser la syntaxe et la signature des différentes fonctions.
 * Créer des types personalisé simples pour les variable d'entrée
