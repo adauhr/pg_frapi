@@ -1,10 +1,12 @@
 CREATE OR REPLACE FUNCTION frapi.get_url(
-    text,
-    numeric)
+    url text,
+    wait numeric,
+	timeout numeric
+	tries integer DEFAULT 3)
   RETURNS text AS
 $BODY$
 #!/bin/sh
-sleep $2 & wget -qO- "$1" & wait
+sleep $2 & wget -T $2 -t $4 -qO- "$1" & wait
 $BODY$
 LANGUAGE plsh VOLATILE;
 
@@ -54,6 +56,7 @@ $BODY$
 DECLARE
 frapi_query text;
 frapi_wait numeric DEFAULT 0.1;
+frapi_timeout numeric DEFAULT 3;
 frapi_result jsonb;
 
 frapi_q text DEFAULT '';
@@ -99,7 +102,7 @@ frapi_query :='http://api-adresse.data.gouv.fr/search/?'||frapi_q||frapi_limit||
 RAISE DEBUG 'frapi_query : %', frapi_query;
 
 
-frapi_result := frapi.get_url(frapi_query,frapi_wait)::jsonb;
+frapi_result := frapi.get_url(frapi_query,frapi_wait,frapi_timeout)::jsonb;
 
 RAISE DEBUG 'attribution : %', (SELECT frapi_result -> 'attribution');
 RAISE DEBUG 'licence : %', (SELECT frapi_result -> 'licence');
@@ -121,6 +124,7 @@ $BODY$
 DECLARE
 frapi_query text;
 frapi_wait numeric DEFAULT 0.1;
+frapi_timeout numeric DEFAULT 3;
 frapi_result jsonb;
 
 frapi_lonlat text DEFAULT '';
@@ -164,7 +168,7 @@ frapi_query :='http://api-adresse.data.gouv.fr/reverse/?'||frapi_lonlat||frapi_l
 RAISE DEBUG 'frapi_query : %', frapi_query;
 
 
-frapi_result := frapi.get_url(frapi_query,frapi_wait)::jsonb;
+frapi_result := frapi.get_url(frapi_query,frapi_wait,frapi_timeout)::jsonb;
 
 RAISE DEBUG 'attribution : %', (SELECT frapi_result -> 'attribution');
 RAISE DEBUG 'licence : %', (SELECT frapi_result -> 'licence');
