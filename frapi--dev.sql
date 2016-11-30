@@ -56,7 +56,7 @@ $BODY$
 DECLARE
 frapi_query text;
 frapi_wait numeric DEFAULT 0.1;
-frapi_timeout numeric DEFAULT 3;
+frapi_timeout numeric DEFAULT 10;
 frapi_result jsonb;
 
 frapi_q text DEFAULT '';
@@ -124,7 +124,7 @@ $BODY$
 DECLARE
 frapi_query text;
 frapi_wait numeric DEFAULT 0.1;
-frapi_timeout numeric DEFAULT 3;
+frapi_timeout numeric DEFAULT 10;
 frapi_result jsonb;
 
 frapi_lonlat text DEFAULT '';
