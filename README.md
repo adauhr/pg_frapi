@@ -1,8 +1,12 @@
 #pg_frapi
 ===============
-
 Une collection de fonction postgresql native qui définissent un mappage et permettent d'interroger une séléction d'API mise à disposition par les diverses administrations françaises.
 Ce projet est encore en gestation et n'est pas encore stable ni même opérationel. Nous avons cependant fait le choix de dévelloper cette de manière totalement ouverte dans l'esprit de la loi sur la modernisation numérique.
+
+##Etat d'avancement
+Le projet est actuelement en phase Alpha, le code est publié pour avis, la licence reste encore à définir.
+Les fonctions adresse_search() et adresse_reverse() sont cependant d'ors est déjà fonctionelles, un rapprochement avec adresse.gouv.fr et en cours pour voir si ce project respecte l'esprit et les capacité techniques de leur API.
+L'installation n'a pour l'instant été testée que sous Ubuntu 14.04 et PostgreSQL 9.5.
 
 ##Objectifs
 ###Version 0.1
