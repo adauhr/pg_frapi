@@ -6,7 +6,7 @@ CREATE OR REPLACE FUNCTION frapi.get_url(
   RETURNS text AS
 $BODY$
 #!/bin/sh
-sleep $2 & wget -T $2 -t $4 -qO- "$1" & wait
+sleep $2 & wget -T $3 -t $4 -qO- "$1" & wait
 $BODY$
 LANGUAGE plsh VOLATILE;
 
