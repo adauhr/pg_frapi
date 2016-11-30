@@ -1,7 +1,7 @@
 CREATE OR REPLACE FUNCTION frapi.get_url(
     url text,
     wait numeric,
-	timeout numeric
+	timeout numeric,
 	tries integer DEFAULT 3)
   RETURNS text AS
 $BODY$
