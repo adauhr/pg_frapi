@@ -50,8 +50,8 @@ LANGUAGE sql VOLATILE
 
 -- DROP FUNCTION frapi.adresse_search(text, integer, boolean, numeric, numeric, text, text, text);
 
-CREATE OR REPLACE FUNCTION frapi.adresse_search(q text, "limit" integer DEFAULT 1, autocomplete boolean DEFAULT true, lon numeric DEFAULT NULL::numeric, lat numeric DEFAULT NULL::numeric, type text DEFAULT NULL::text, postcode text DEFAULT NULL::text, citycode text DEFAULT NULL::text)
-RETURNS SETOF frapi.adresse_search AS
+CREATE OR REPLACE FUNCTION frapi.adresse_search_json(q text, "limit" integer DEFAULT 1, autocomplete boolean DEFAULT true, lon numeric DEFAULT NULL::numeric, lat numeric DEFAULT NULL::numeric, type text DEFAULT NULL::text, postcode text DEFAULT NULL::text, citycode text DEFAULT NULL::text)
+RETURNS jsonb AS
 $BODY$
 DECLARE
 frapi_query text;
@@ -111,15 +111,24 @@ RAISE DEBUG 'type : %', (SELECT frapi_result -> 'type');
 RAISE DEBUG 'version : %', (SELECT frapi_result -> 'version');
 
 
-RETURN QUERY SELECT * FROM frapi.adresse_search_format(frapi_result);
+RETURN frapi_result;
 
 END
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 120;
 
-CREATE OR REPLACE FUNCTION frapi.adresse_reverse( lon numeric, lat numeric, "limit" integer DEFAULT 1,  autocomplete boolean DEFAULT true,  type text DEFAULT NULL::text,  postcode text DEFAULT NULL::text,  citycode text DEFAULT NULL::text)
+CREATE OR REPLACE FUNCTION frapi.adresse_search(q text, "limit" integer DEFAULT 1, autocomplete boolean DEFAULT true, lon numeric DEFAULT NULL::numeric, lat numeric DEFAULT NULL::numeric, type text DEFAULT NULL::text, postcode text DEFAULT NULL::text, citycode text DEFAULT NULL::text)
 RETURNS SETOF frapi.adresse_search AS
+$BODY$
+SELECT * FROM frapi.adresse_search_format(frapi.adresse_search_json("q","limit","autocomplete","lon","lat","type","postcode","citycode"));
+$BODY$
+LANGUAGE SQL;
+
+
+
+CREATE OR REPLACE FUNCTION frapi.adresse_reverse_json( lon numeric, lat numeric, "limit" integer DEFAULT 1,  autocomplete boolean DEFAULT true,  type text DEFAULT NULL::text,  postcode text DEFAULT NULL::text,  citycode text DEFAULT NULL::text)
+RETURNS jsonb AS
 $BODY$
 DECLARE
 frapi_query text;
@@ -177,10 +186,17 @@ RAISE DEBUG 'type : %', (SELECT frapi_result -> 'type');
 RAISE DEBUG 'version : %', (SELECT frapi_result -> 'version');
 
 
-RETURN QUERY SELECT * FROM frapi.adresse_search_format(frapi_result);
+RETURN frapi_result;
 
 END
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 120;
   
+
+CREATE OR REPLACE FUNCTION frapi.adresse_reverse( lon numeric, lat numeric, "limit" integer DEFAULT 1,  autocomplete boolean DEFAULT true,  type text DEFAULT NULL::text,  postcode text DEFAULT NULL::text,  citycode text DEFAULT NULL::text)
+RETURNS SETOF frapi.adresse_search AS
+$BODY$
+SELECT * FROM frapi.adresse_search_format(frapi.adresse_reverse_json("lon","lat","limit","autocomplete","type","postcode","citycode"));
+$BODY$
+LANGUAGE SQL;
