@@ -1,5 +1,5 @@
 EXTENSION = frapi
-DATA = frapi--dev.sql
+DATA = $(wildcard .sql)
 
 TYPE := adresse_search
 TYPE := $(addprefix SQL/TYPE/, $(addsuffix .sql, $(TYPE)))
@@ -11,10 +11,10 @@ usage:
 	
 .PHONY : build
 build : frapi--dev.sql
-	@echo 'Building dev version'        
+	@echo 'Building develloper version'        
 
 frapi--dev.sql : $(TYPE) $(FUNCTION)
-	cat $(FUNCTION) > frapi--dev.sql.sql && cat $(TYPE) >> frapi--dev.sql.sql
+	cat $(FUNCTION) > $@ && cat $(TYPE) >> $@
 	
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
