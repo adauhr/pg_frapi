@@ -14,7 +14,7 @@ build : frapi--dev.sql
 	@echo 'Building develloper version'        
 
 frapi--dev.sql : $(TYPE) $(FUNCTION)
-	cat $(FUNCTION) > $@ && cat $(TYPE) >> $@
+	cat $(TYPE) > $@ && cat $(FUNCTION) >> $@
 	
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
