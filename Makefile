@@ -1,5 +1,5 @@
 EXTENSION = frapi
-DATA = $(wildcard .sql)
+DATA = $(wildcard *.sql)
 
 TYPE := adresse_search
 TYPE := $(addprefix SQL/TYPE/, $(addsuffix .sql, $(TYPE)))
