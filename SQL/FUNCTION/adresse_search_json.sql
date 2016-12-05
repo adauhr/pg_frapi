@@ -1,8 +1,8 @@
 -- Function: adresse_search_json(text, integer, boolean, numeric, numeric, text, text, text)
 
--- DROP FUNCTION adresse_search_json(text, integer, boolean, numeric, numeric, text, text, text);
+-- DROP FUNCTION @extschema@.adresse_search_json(text, integer, boolean, numeric, numeric, text, text, text);
 
-CREATE OR REPLACE FUNCTION adresse_search_json(
+CREATE OR REPLACE FUNCTION @extschema@.adresse_search_json(
     q text,
     "limit" integer DEFAULT 1,
     autocomplete boolean DEFAULT true,
@@ -62,7 +62,7 @@ frapi_query :='http://api-adresse.data.gouv.fr/search/?'||frapi_q||frapi_limit||
 RAISE DEBUG 'frapi_query : %', frapi_query;
 
 
-frapi_result := get_url(frapi_query,frapi_wait,frapi_timeout)::jsonb;
+frapi_result := @extschema@.get_url(frapi_query,frapi_wait,frapi_timeout)::jsonb;
 
 RAISE DEBUG 'attribution : %', (SELECT frapi_result -> 'attribution');
 RAISE DEBUG 'licence : %', (SELECT frapi_result -> 'licence');
