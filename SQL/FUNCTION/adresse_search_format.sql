@@ -1,8 +1,8 @@
 -- Function: adresse_search_format(jsonb)
 
--- DROP FUNCTION @extschema@.adresse_search_format(jsonb);
+-- DROP FUNCTION adresse_search_format(jsonb);
 
-CREATE OR REPLACE FUNCTION @extschema@.adresse_search_format(raw_result jsonb)
+CREATE OR REPLACE FUNCTION adresse_search_format(raw_result jsonb)
   RETURNS SETOF adresse_search AS
 $BODY$
 WITH result_array as (SELECT jsonb_array_elements_text( raw_result -> 'features')::jsonb f )

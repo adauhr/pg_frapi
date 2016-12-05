@@ -1,8 +1,8 @@
 -- Function: get_url(text, numeric, numeric, integer)
 
--- DROP FUNCTION @extschema@.get_url(text, numeric, numeric, integer);
+-- DROP FUNCTION get_url(text, numeric, numeric, integer);
 
-CREATE OR REPLACE FUNCTION @extschema@.get_url(
+CREATE OR REPLACE FUNCTION get_url(
     url text,
     wait numeric,
     timeout numeric,

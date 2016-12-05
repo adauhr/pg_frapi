@@ -1,8 +1,8 @@
 -- Function: adresse_search(text, integer, boolean, numeric, numeric, text, text, text)
 
--- DROP FUNCTION @extschema@.adresse_search(text, integer, boolean, numeric, numeric, text, text, text);
+-- DROP FUNCTION adresse_search(text, integer, boolean, numeric, numeric, text, text, text);
 
-CREATE OR REPLACE FUNCTION @extschema@.adresse_search(
+CREATE OR REPLACE FUNCTION adresse_search(
     q text,
     "limit" integer DEFAULT 1,
     autocomplete boolean DEFAULT true,
@@ -11,8 +11,8 @@ CREATE OR REPLACE FUNCTION @extschema@.adresse_search(
     type text DEFAULT NULL::text,
     postcode text DEFAULT NULL::text,
     citycode text DEFAULT NULL::text)
-  RETURNS SETOF @extschema@.adresse_search AS
+  RETURNS SETOF adresse_search AS
 $BODY$
-SELECT * FROM @extschema@.adresse_search_format(adresse_search_json("q","limit","autocomplete","lon","lat","type","postcode","citycode"));
+SELECT * FROM adresse_search_format(adresse_search_json("q","limit","autocomplete","lon","lat","type","postcode","citycode"));
 $BODY$
   LANGUAGE sql VOLATILE;

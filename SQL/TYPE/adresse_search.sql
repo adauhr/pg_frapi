@@ -1,8 +1,8 @@
 -- Type: adresse_search
 
--- DROP TYPE @extschema@.adresse_search;
+-- DROP TYPE adresse_search;
 
-CREATE TYPE @extschema@.adresse_search AS
+CREATE TYPE adresse_search AS
    (id text,
     type text,
     score numeric,

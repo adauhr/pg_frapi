@@ -1,8 +1,8 @@
 -- Function: adresse_reverse_json(numeric, numeric, integer, boolean, text, text, text)
 
--- DROP FUNCTION @extschema@.adresse_reverse_json(numeric, numeric, integer, boolean, text, text, text);
+-- DROP FUNCTION adresse_reverse_json(numeric, numeric, integer, boolean, text, text, text);
 
-CREATE OR REPLACE FUNCTION @extschema@.adresse_reverse_json(
+CREATE OR REPLACE FUNCTION adresse_reverse_json(
     lon numeric,
     lat numeric,
     "limit" integer DEFAULT 1,
@@ -59,7 +59,7 @@ frapi_query :='http://api-adresse.data.gouv.fr/reverse/?'||frapi_lonlat||frapi_l
 RAISE DEBUG 'frapi_query : %', frapi_query;
 
 
-frapi_result := @extschema@.get_url(frapi_query,frapi_wait,frapi_timeout)::jsonb;
+frapi_result := get_url(frapi_query,frapi_wait,frapi_timeout)::jsonb;
 
 RAISE DEBUG 'attribution : %', (SELECT frapi_result -> 'attribution');
 RAISE DEBUG 'licence : %', (SELECT frapi_result -> 'licence');
