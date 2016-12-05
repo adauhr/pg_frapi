@@ -13,4 +13,4 @@ CREATE TYPE adresse_search AS
     city text,
     context text,
     label text,
-    geom geometry(Point,4326);
+    geom geometry(Point,4326));
