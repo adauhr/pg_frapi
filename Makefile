@@ -3,7 +3,7 @@ DATA = frapi--dev.sql
 
 TYPE := adresse_search
 TYPE := $(addprefix SQL/TYPE/, $(addsuffix .sql, $(TYPE)))
-FUNCTION := get_url adresse_search_fomat adresse_search_json adresse_reverse_json adresse_search adresse_reverse
+FUNCTION := get_url adresse_search_format adresse_search_json adresse_reverse_json adresse_search adresse_reverse
 FUNCTION := $(addprefix SQL/FUNCTION/, $(addsuffix .sql, $(FUNCTION)))
 
 usage:
