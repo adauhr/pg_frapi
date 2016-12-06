@@ -1,10 +1,10 @@
 EXTENSION = frapi
 DATA = $(wildcard *.sql)
 
-TYPE := adresse_search
-TYPE := $(addprefix SQL/TYPE/, $(addsuffix .sql, $(TYPE)))
-FUNCTION := get_url adresse_search_format adresse_search_json adresse_reverse_json adresse_search adresse_reverse
-FUNCTION := $(addprefix SQL/FUNCTION/, $(addsuffix .sql, $(FUNCTION)))
+FRAPI_SHARED := func_get_url
+FRAPI_SHARED := $(addprefix SQL/SHARED/, $(addsuffix .sql, $(FRAPI_SHARED)))
+FRAPI_ADRESSE := type_adresse_search func_adresse_search_format func_adresse_search_json func_adresse_reverse_json func_adresse_search func_adresse_reverse
+FRAPI_ADRESSE := $(addprefix SQL/ADRESSE/, $(addsuffix .sql, $(FRAPI_ADRESSE)))
 
 usage:
 	@echo 'pg_frapi usage : "make install" to instal the extension, "make build" to build dev version against source SQL'
@@ -13,8 +13,8 @@ usage:
 build : frapi--dev.sql
 	@echo 'Building develloper version'        
 
-frapi--dev.sql : $(TYPE) $(FUNCTION)
-	cat $(TYPE) > $@ && cat $(FUNCTION) >> $@
+frapi--dev.sql : $(FRAPI_SHARED) $(FRAPI_ADRESSE)
+	cat $(FRAPI_SHARED) > $@ && cat $(FRAPI_ADRESSE) >> $@
 	
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
