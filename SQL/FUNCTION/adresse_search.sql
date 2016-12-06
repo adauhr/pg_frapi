@@ -13,6 +13,6 @@ CREATE OR REPLACE FUNCTION @extschema@.adresse_search(
     citycode text DEFAULT NULL::text)
   RETURNS SETOF @extschema@.adresse_search AS
 $BODY$
-SELECT * FROM @extschema@.adresse_search_format(adresse_search_json("q","limit","autocomplete","lon","lat","type","postcode","citycode"));
+SELECT * FROM @extschema@.adresse_search_format(@extschema@.adresse_search_json("q","limit","autocomplete","lon","lat","type","postcode","citycode"));
 $BODY$
   LANGUAGE sql VOLATILE;
