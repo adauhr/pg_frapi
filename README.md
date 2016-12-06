@@ -1,7 +1,7 @@
 #pg_frapi
 
-Une collection de fonction postgresql native qui définissent un mappage et permettent d'interroger une séléction d'API mise à disposition par les diverses administrations françaises.
-Ce projet est encore en gestation et n'est pas encore stable ni même opérationel. Nous avons cependant fait le choix de dévelloper cette de manière totalement ouverte dans l'esprit de la loi sur la modernisation numérique.
+Une collection de fonctions postgresql natives qui définissent un mappage et permettent d'interroger une séléction d'API mises à disposition par les diverses administrations françaises.
+Ce projet est encore en gestation et n'est pas encore stable. Nous avons cependant fait le choix de le dévelloper de manière totalement ouverte dans l'esprit de la loi sur la modernisation numérique.
 
 ##Etat d'avancement
 Le projet est actuelement en phase Alpha, le code est publié pour avis, la licence reste encore à définir.
@@ -16,6 +16,7 @@ L'installation n'a pour l'instant été testée que sous Ubuntu 14.04 et Postgre
   - [x] Fourniture d'une fonction de conversion entre le JSON brut et le type composite
 - [x] Implémenter un système de build suffisant pour assembler les différents fichiers SQL
 - [ ] Choix d'une politique de tags, de versionnement et d'utilisation des branches adéquat pour les dévelopements futurs
+- [ ] Choix d'une licence FOSS pour le projet
 - [ ] ~~Proposer une implémentation simple pour l'API ign~~ ***-->déplacé vers version 0.2***
 
 ###Version 0.2
