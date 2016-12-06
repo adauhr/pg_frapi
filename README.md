@@ -10,14 +10,21 @@ L'installation n'a pour l'instant été testée que sous Ubuntu 14.04 et Postgre
 
 ##Objectifs
 ###Version 0.1
-* Proposer une implémentation simple pour l'API adresse.gouv.fr
-* Proposer une implémentation simple pour l'API ign
+- [x] Proposer une implémentation simple pour l'API adresse.gouv.fr
+  - [x] Définir les paramètres d'entrée de manière à pouvoir utiliser tous les paramètres de l'API via des fonctions PG
+  - [x] Possibilité de récupérer un JSON brut ou un des lignes composites PG définie pour les résultats
+  - [x] Fourniture d'une fonction de conversion entre le JSON brut et le type composite
+- [x] Implémenter un système de build suffisant pour assembler les différents fichiers SQL
+- [ ] Choix d'une politique de tags, de versionnement et d'utilisation des branches adéquat pour les dévelopements futurs
+- [ ] ~~Proposer une implémentation simple pour l'API ign~~ ***-->déplacé vers version 0.2***
 
 ###Version 0.2
-* Statbiliser la syntaxe et la signature des différentes fonctions.
-* Créer des types personalisé simples pour les variable d'entrée
-* Créer des types composites pour les résultats
-* Evaluer les moyens de récupérer facilement des métadonées liées au requêtes
+- [ ] Commenter le code de l'API adresse.gouv.fr
+- [ ] Rédiger une page de documentation utilisateur pour l'API adresse.gouv.fr
+- [ ] Rédiger une page de documentation pour le systeme de build
+- [ ] Proposer une implémentation simple pour l'API ign
+- [ ] Stabiliser la syntaxe et la signature des différentes fonctions
+- [ ] Amélioration du système de build pour générer des scripts d'update
 
 
 ##Prérequis
@@ -25,8 +32,11 @@ L'extension [PL/SH](https://github.com/petere/plsh) est actuellement requise pui
 (Sur une suggestion de [Christian Quest](https://github.com/cquest) il sera necessaire d'evaluer s'il ne serait pas opportun de basculer vers l'extension [pgsql-http](https://github.com/pramsey/pgsql-http))
 
 
-##Installation
-1. Clone the repo
-1. Run `make install`
-1. Execute `CREATE EXTENSION frapi;` inside your DB
-1. Call `SELECT frapi.test();` this should return french sentence saying 'this is a test' as string
+##Installation rapide (Testée sur Ubuntu 14.04)
+1. Cloner le repo
+1. Dans le shell executer `make build` (cette étape s'applique uniquement pour la version dev en attendant la premièer release)
+1. Dans le shell executer `make install`
+1. Dans l'interface SQL executer `CREATE EXTENSION frapi;` inside your DB
+
+##Test rapide post-installation
+* **API adresse.gouv.fr**</br>Dans l'interface SQL executer `SELECT * FROM frapi.adresse_search('8 bd du port');` cela devrait retourner des lignes postgresql calquées sur la structure de donnée de l'API décrite [ici](https://adresse.data.gouv.fr/api/)
