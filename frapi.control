@@ -1,6 +1,6 @@
 # pg_frapi extension
 comment = 'Functions to API mapping for a collection of french administrtion data API'
-default_version = 'dev'
+default_version = '0.1'
 relocatable = false
 schema = 'frapi'
 requires = 'plsh, postgis'
