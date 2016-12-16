@@ -58,7 +58,7 @@ IF "citycode" IS NOT NULL THEN
    frapi_citycode := '&citycode='||"citycode"::text;
 END IF;
 
-frapi_query :='http://api-adresse.data.gouv.fr/search/?'||frapi_q||frapi_limit||frapi_autocomplete||frapi_lonlat||frapi_type||frapi_postcode||frapi_citycode;
+frapi_query :='https://api-adresse.data.gouv.fr/search/?'||frapi_q||frapi_limit||frapi_autocomplete||frapi_lonlat||frapi_type||frapi_postcode||frapi_citycode;
 RAISE DEBUG 'frapi_query : %', frapi_query;
 
 
