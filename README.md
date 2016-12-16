@@ -15,8 +15,8 @@ L'installation n'a pour l'instant été testée que sous Ubuntu 14.04 et Postgre
   - [x] Possibilité de récupérer un JSON brut ou un des lignes composites PG définie pour les résultats
   - [x] Fourniture d'une fonction de conversion entre le JSON brut et le type composite
 - [x] Implémenter un système de build suffisant pour assembler les différents fichiers SQL
-- [ ] Choix d'une politique de tags, de versionnement et d'utilisation des branches adéquat pour les dévelopements futurs
-- [ ] Choix d'une licence FOSS pour le projet
+- [x] Choix d'une politique de tags, de versionnement et d'utilisation des branches adéquat pour les dévelopements futurs
+- [x] Choix d'une licence FOSS pour le projet
 - [ ] ~~Proposer une implémentation simple pour l'API ign~~ ***-->déplacé vers version 0.2***
 
 ###Version 0.2
