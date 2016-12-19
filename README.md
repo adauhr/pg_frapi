@@ -8,6 +8,8 @@ Le projet est actuelement en phase Alpha, le code est publié pour avis, la lice
 Les fonctions adresse_search() et adresse_reverse() sont cependant d'ors est déjà fonctionelles, un rapprochement avec adresse.gouv.fr et en cours pour voir si ce project respecte l'esprit et les capacité techniques de leur API.
 L'installation n'a pour l'instant été testée que sous Ubuntu 14.04 et PostgreSQL 9.5.
 
+L'extension doit être maniée avec précaution puisqu'aucun diagnostic de sécurité n'as été établi et que la dépendance PLSH n'est pas qualifié de 'safe' par son auteur (un accès à la ligne de commande via une injection SQL est possible en théorie).
+
 ##Objectifs
 ###Version 0.1
 - [x] Proposer une implémentation simple pour l'API adresse.gouv.fr
@@ -29,15 +31,26 @@ L'installation n'a pour l'instant été testée que sous Ubuntu 14.04 et Postgre
 
 
 ##Prérequis
-L'extension [PL/SH](https://github.com/petere/plsh) est actuellement requise puisqu'elle sert actuellemnt de passerelle pour acceder au API.
+L'extension [PostGis](http://postgis.net) est requise puisque le type géométrie est utilisé en retour de fonction.
+
+L'extension [PL/SH](https://github.com/petere/plsh) est actuellement requise puisqu'elle sert actuellement de passerelle pour acceder aux API.
+
+Enfin les paquets suivant peuvent s'avérer nécessaire pour compiller plsh et sont donc aussi requis: build-essential postgresql-server-dev-X.X (remplacer par votre numéro de version de PostgreSQL)
+
 (Sur une suggestion de [Christian Quest](https://github.com/cquest) il sera necessaire d'evaluer s'il ne serait pas opportun de basculer vers l'extension [pgsql-http](https://github.com/pramsey/pgsql-http))
 
-
 ##Installation rapide (Testée sur Ubuntu 14.04)
+1. Installer et configurer les prérequis (postgres, postgis, plsh)
 1. Cloner le repo
-1. Dans le shell executer `make build` (cette étape s'applique uniquement pour la version dev en attendant la premièer release)
 1. Dans le shell executer `make install`
 1. Dans l'interface SQL executer `CREATE EXTENSION frapi;` inside your DB
 
 ##Test rapide post-installation
 * **API adresse.gouv.fr**</br>Dans l'interface SQL executer `SELECT * FROM frapi.adresse_search('8 bd du port');` cela devrait retourner des lignes postgresql calquées sur la structure de donnée de l'API décrite [ici](https://adresse.data.gouv.fr/api/)
+
+##Dévellopement
+A partir de la première version tagée 0.1 la branch master sert exclusivement à publier les releases.
+Pour une version donnée c'est le script SQL correspondant qui sera installé par défaut par PGXS.
+
+Dans la branche "develop" la version par défaut est la version 'dev' non numérotée.
+Le script d'instalation corespondant est inscrit dans le .gitignore il faut donc compiler ce fichier avant d'installer la version dev. Pour ce faire executer `make build` dans le répertoire.
