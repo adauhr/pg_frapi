@@ -4,8 +4,9 @@ addons:
   postgresql: "9.5"
   apt:
     packages:
-      - postgresql-9.5-postgis-2.3
       - build-essential
+env:      
+  - PGVERSION=9.5
 
 before_install:
   - psql -c "CREATE EXTENSION postgis"
