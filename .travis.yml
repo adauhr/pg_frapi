@@ -2,14 +2,13 @@ sudo: required
 dist: trusty
 addons:
   postgresql: "9.5"
-  apt:
-    packages:
-      - postgresql-server-dev-$PGVERSION
-      - postgresql-$PGVERSION-postgis-2.3
+
 env:      
   - PGVERSION=9.5
 
 before_install:
+  - sudo apt-get postgresql-server-dev-$PGVERSION postgresql-common
+  - sudo apt-get postgresql-$PGVERSION-postgis-2.3
   - psql -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh
