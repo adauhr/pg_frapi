@@ -7,8 +7,9 @@ env:
   - PGVERSION=9.5
 
 before_install:
-  - sudo apt-get postgresql-server-dev-$PGVERSION postgresql-common
-  - sudo apt-get postgresql-$PGVERSION-postgis-2.3
+  - sudo apt-get update
+  - sudo apt-get install postgresql-server-dev-$PGVERSION postgresql-common
+  - sudo apt-get install postgresql-$PGVERSION-postgis-2.3
   - psql -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh
