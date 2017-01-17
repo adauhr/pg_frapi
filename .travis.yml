@@ -3,7 +3,7 @@ dist: trusty
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y
-      postgresql-9.5 postgresql-server-dev-9.5 postgresql-9.5-postgis
+      postgresql-9.5 postgresql-server-dev-9.5 postgresql-9.5-postgis-2.3
       build-essential
   - psql -U postgres -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
