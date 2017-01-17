@@ -5,14 +5,15 @@ before_install:
   - sudo apt-get install -y
       postgresql-9.5 postgresql-server-dev-9.5 postgresql-9.5-postgis-2.3
       build-essential
-  - psql -c "CREATE EXTENSION postgis"
+  - psql -c "CREATE DATABASE travis_ci_test"
+  - psql -c "CREATE EXTENSION postgis" travis_ci_test
   - git clone https://github.com/petere/plsh
   - cd plsh && make
   - cd plsh && sudo make install
-  - psql -c "CREATE EXTENSION plsh"
+  - psql -c "CREATE EXTENSION plsh" travis_ci_test
   
 script:
   - make build
   - sudo make install
-  - psql -c "CREATE EXTENSION frapi"
-  - psql -U postgres -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')"
+  - psql -c "CREATE EXTENSION frapi" travis_ci_test
+  - psql -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')" travis_ci_test
