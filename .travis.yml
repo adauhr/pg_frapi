@@ -11,12 +11,12 @@ env:
 before_install:
   - psql -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
-  - cd plsh && make
-  - cd plsh && sudo make install
+  - cd plsh && make PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - cd plsh && sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - psql -U postgres -c "CREATE EXTENSION plsh"
   
 script:
-  - make build
-  - sudo make install
+  - make build PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - psql -U postgres -c "CREATE EXTENSION frapi"
   - psql -U postgres -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')"
