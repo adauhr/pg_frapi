@@ -4,7 +4,7 @@ addons:
   postgresql: "9.5"
   apt:
     packages:
-      - build-essential
+      - postgresql-9.5-postgis-2.3
 env:      
   - PGVERSION=9.5
 
