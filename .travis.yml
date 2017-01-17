@@ -8,7 +8,7 @@ addons:
       - build-essential
 
 before_install:
-  - sudo -u postgres psql -c "CREATE EXTENSION postgis"
+  - psql -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh && make
   - cd plsh && sudo make install
