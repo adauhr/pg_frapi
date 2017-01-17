@@ -4,7 +4,8 @@ addons:
   postgresql: "9.5"
   apt:
     packages:
-      - postgresql-9.5-postgis-2.3
+      - postgresql-server-dev-$PGVERSION
+      - postgresql-$PGVERSION-postgis-2.3
 env:      
   - PGVERSION=9.5
 
@@ -12,7 +13,7 @@ before_install:
   - psql -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh
-  - make PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - make all PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - psql -U postgres -c "CREATE EXTENSION plsh"
   - cd ../
