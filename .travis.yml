@@ -4,22 +4,23 @@ dist: trusty
 env:      
   - PGVERSION=9.5
 
+addons:
+   postgresql: $PGVERSION
+   
 before_install:
-  - sudo /etc/init.d/postgresql stop
-  - sudo /etc/init.d/postgresql start PGVERSION
   - sudo apt-get update
   - sudo apt-get install postgresql-server-dev-$PGVERSION postgresql-common
   - sudo apt-get install postgresql-$PGVERSION-postgis-2.3
-  - psql --cluster PGVERSION/main -U postgres -c "CREATE EXTENSION postgis"
+  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh
   - make all PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
-  - psql --cluster PGVERSION/main -U postgres -c "CREATE EXTENSION plsh"
+  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION plsh"
   - cd ../
   
 script:
   - make build PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
-  - psql --cluster PGVERSION/main -U postgres -c "CREATE EXTENSION frapi"
-  - psql --cluster PGVERSION/main -U postgres -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')"
+  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION frapi"
+  - psql --cluster $PGVERSION/main -U postgres -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')"
