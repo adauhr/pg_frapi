@@ -2,15 +2,15 @@ sudo: required
 dist: trusty
 
 env:
-  - PGVERSION=9.5
-  - PGVERSION=9.6
+  - PGVERSION=9.5 POSTGISVERSION=2.3
+  - PGVERSION=9.6 POSTGISVERSION=2.3
    
 before_install:
   - sudo /etc/init.d/postgresql stop
   - sudo /etc/init.d/postgresql start $PGVERSION
   - sudo apt-get update
   - sudo apt-get install postgresql-server-dev-$PGVERSION postgresql-common
-  - sudo apt-get install postgresql-$PGVERSION-postgis
+  - sudo apt-get install postgresql-$PGVERSION-postgis-$POSTGISVERSION
   - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh
