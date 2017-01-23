@@ -17,7 +17,7 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install postgresql-server-dev-$PGVERSION postgresql-common
   - sudo apt-get install postgresql-$PGVERSION-postgis-$POSTGISVERSION
-  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION postgis $POSTGISVERSION"
+  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION postgis '$POSTGISVERSION'"
   - git clone https://github.com/petere/plsh
   - cd plsh
   - make all PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
