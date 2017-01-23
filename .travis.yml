@@ -3,11 +3,10 @@ dist: trusty
 
 env:      
   - PGVERSION=9.5
-
-addons:
-   postgresql: $PGVERSION
    
 before_install:
+  - sudo /etc/init.d/postgresql stop
+  - sudo /etc/init.d/postgresql start $PGVERSION
   - sudo apt-get update
   - sudo apt-get install postgresql-server-dev-$PGVERSION postgresql-common
   - sudo apt-get install postgresql-$PGVERSION-postgis-2.3
