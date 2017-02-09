@@ -19,7 +19,7 @@ frapi--dev.sql : $(FRAPI_SHARED) $(FRAPI_ADRESSE)
 	cat $(FRAPI_SHARED) > $@ && cat $(FRAPI_ADRESSE) >> $@
 
 test:
-	pg_prove --pset tuples_only=1 $(TESTS)
+	pg_prove -v --pset tuples_only=1 $(TESTS)
 
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)

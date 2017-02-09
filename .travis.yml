@@ -29,7 +29,6 @@ install:
   - make build PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION frapi"
-  - PGPORT=55435 psql -U postgres -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')"
 
 script:
   - PGPORT=55435 make test PGUSER=postgres PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
