@@ -18,7 +18,12 @@ before_install:
   - cd pgtap
   - make PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION pgtap"
   - cd ../
+
+
+
+
   
 install:
   - make build PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
