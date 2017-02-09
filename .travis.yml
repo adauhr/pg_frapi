@@ -6,21 +6,26 @@ env:
   - PGVERSION=9.6 POSTGISVERSION=2.3
    
 before_install:
-  - sudo /etc/init.d/postgresql stop
-  - sudo /etc/init.d/postgresql start $PGVERSION
-  - sudo apt-get update
-  - sudo apt-get install postgresql-server-dev-$PGVERSION postgresql-common
-  - sudo apt-get install postgresql-$PGVERSION-postgis-$POSTGISVERSION
-  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION postgis"
+  - wget https://gist.githubusercontent.com/MarHoff/9e1cf08ca20278818df6e60e89e00330/raw/pg-travis-install.sh
+  - bash ./pg-travis-install.sh
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh
   - make all PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
-  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION plsh"
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION plsh"
+  - cd ../
+  - git clone https://github.com/theory/pgtap.git
+  - cd pgtap
+  - make PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - cd ../
   
-script:
+install:
   - make build PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
   - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
-  - psql --cluster $PGVERSION/main -U postgres -c "CREATE EXTENSION frapi"
-  - psql --cluster $PGVERSION/main -U postgres -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')"
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION frapi"
+  - PGPORT=55435 psql -U postgres -c "SELECT * FROM frapi.adresse_search('route des anges, landéda')"
+
+script:
+  - PGPORT=55435 make test PGUSER=postgres PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
