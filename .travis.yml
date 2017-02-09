@@ -1,0 +1,34 @@
+sudo: required
+dist: trusty
+
+env:
+  - PGVERSION=9.5 POSTGISVERSION=2.3
+  - PGVERSION=9.6 POSTGISVERSION=2.3
+   
+before_install:
+  - bash ./TEST/pg-travis-install.sh
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION postgis"
+  - git clone https://github.com/petere/plsh
+  - cd plsh
+  - make all PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION plsh"
+  - cd ../
+  - git clone https://github.com/theory/pgtap.git
+  - cd pgtap
+  - make PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION pgtap"
+  - cd ../
+
+
+
+
+  
+install:
+  - make build PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - sudo make install PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config
+  - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION frapi"
+
+script:
+  - PGPORT=55435 make test PGUSER=postgres PG_CONFIG=/usr/lib/postgresql/$PGVERSION/bin/pg_config

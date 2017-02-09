@@ -1,4 +1,5 @@
 #pg_frapi
+[![Build Status](https://travis-ci.org/adauhr/pg_frapi.svg?branch=develop)](https://travis-ci.org/adauhr/pg_frapi)
 
 Une collection de fonctions postgresql natives qui définissent un mappage et permettent d'interroger une séléction d'API mises à disposition par les diverses administrations françaises.
 Ce projet est encore en gestation et n'est pas encore stable. Nous avons cependant fait le choix de le dévelloper de manière totalement ouverte dans l'esprit de la loi sur la modernisation numérique.
@@ -22,6 +23,7 @@ L'extension doit être maniée avec précaution puisqu'aucun diagnostic de sécu
 - [ ] ~~Proposer une implémentation simple pour l'API ign~~ ***-->déplacé vers version 0.2***
 
 ###Version 0.2
+- [x] Ajout de tests et d'integration continue (Travis CI)
 - [ ] Commenter le code de l'API adresse.gouv.fr
 - [ ] Rédiger une page de documentation utilisateur pour l'API adresse.gouv.fr
 - [ ] Rédiger une page de documentation pour le systeme de build
