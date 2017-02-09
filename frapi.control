@@ -1,6 +1,6 @@
 # pg_frapi extension
 comment = 'In-databas api-wrapper functions for a collection of french administrtion data API'
-default_version = '0.1.1'
+default_version = '0.1.2'
 relocatable = false
 schema = 'frapi'
 requires = 'plsh, postgis'
