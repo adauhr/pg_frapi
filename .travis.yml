@@ -6,8 +6,7 @@ env:
   - PGVERSION=9.6 POSTGISVERSION=2.3
    
 before_install:
-  - wget https://gist.githubusercontent.com/MarHoff/9e1cf08ca20278818df6e60e89e00330/raw/pg-travis-install.sh
-  - bash ./pg-travis-install.sh
+  - bash ./TEST/pg-travis-install.sh
   - PGPORT=55435 psql -U postgres -c "CREATE EXTENSION postgis"
   - git clone https://github.com/petere/plsh
   - cd plsh
