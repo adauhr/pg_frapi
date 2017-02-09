@@ -13,7 +13,7 @@ SELECT results_eq('baninfo_adresse_reverse','baninfo_expected',
 PREPARE performance_adresse_search AS SELECT * FROM frapi.adresse_search('route des anges, landéda');
 SELECT performs_ok('performance_adresse_search',2000,
 	'Test sans mise en cache');
-SELECT performs_ok('performance_adresse_search',150,
+SELECT performs_ok('performance_adresse_search',600,
 	'Test après mise en cache');
 
 
