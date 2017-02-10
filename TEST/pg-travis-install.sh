@@ -1,5 +1,6 @@
 #!/bin/bash
-
+#Variation of pg-travis-test-sh by Peter Eisentraut to only install required packages and set up the db
+#See : https://gist.github.com/petere/6023944#file-pg-travis-test-sh
 set -eux
 
 sudo apt-get update
