@@ -1,5 +1,5 @@
 # pg_frapi extension
-comment = 'Functions to API mapping for a collection of french administrtion data API'
+comment = 'In-databas api-wrapper functions for a collection of french administrtion data API'
 default_version = 'dev'
 relocatable = false
 schema = 'frapi'

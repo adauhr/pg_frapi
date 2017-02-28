@@ -21,4 +21,4 @@ SELECT
 ST_SetSRID(ST_GeomFromGeoJSON((f->'geometry')::text),4326)::geometry(Point,4326) as adresse_geom
 FROM result_array;
 $BODY$
-  LANGUAGE sql VOLATILE;
+  LANGUAGE sql STABLE COST 2000;

@@ -72,4 +72,4 @@ RETURN frapi_result;
 
 END
 $BODY$
-  LANGUAGE plpgsql VOLATILE;
+  LANGUAGE plpgsql STABLE COST 2000;

@@ -15,4 +15,4 @@ CREATE OR REPLACE FUNCTION @extschema@.adresse_search(
 $BODY$
 SELECT * FROM @extschema@.adresse_search_format(@extschema@.adresse_search_json("q","limit","autocomplete","lon","lat","type","postcode","citycode"));
 $BODY$
-  LANGUAGE sql VOLATILE;
+  LANGUAGE sql STABLE COST 2000;

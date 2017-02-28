@@ -12,4 +12,4 @@ $BODY$
 #!/bin/sh
 sleep $2 & wget -T $3 -t $4 -qO- "$1" & wait
 $BODY$
-  LANGUAGE plsh VOLATILE;
+  LANGUAGE plsh STABLE COST 2000;
