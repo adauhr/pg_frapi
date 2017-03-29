@@ -1,13 +1,13 @@
 SELECT plan(5);
 
-PREPARE baninfo_expected AS VALUES('db','info','baninfo','baninfo','0101000020E610000000000000000000000000000000000000'::geometry);
-
-PREPARE baninfo_adresse_search AS SELECT id,type,name,label,geom FROM frapi.adresse_search('baninfo');
-SELECT results_eq('baninfo_adresse_search','baninfo_expected',
+PREPARE search_expected AS VALUES('{"type": "FeatureCollection", "query": "baninfo", "attribution": "BAN", "features": [], "version": "draft", "limit": 1, "licence": "ODbL 1.0"}'::jsonb);
+PREPARE baninfo_adresse_search AS SELECT * FROM frapi.adresse_search_json('baninfo');
+SELECT results_eq('baninfo_adresse_search','search_expected',
 	'La fonction adresse renvoi la valeur test de Addokk');
 
-PREPARE baninfo_adresse_reverse AS SELECT id,type,name,label,geom FROM frapi.adresse_reverse(0.,0.);
-SELECT results_eq('baninfo_adresse_reverse','baninfo_expected',
+PREPARE reverse_expected AS VALUES('{"type": "FeatureCollection", "attribution": "BAN", "features": [], "version": "draft", "limit": 1, "licence": "ODbL 1.0"}'::jsonb);
+PREPARE baninfo_adresse_reverse AS SELECT * FROM frapi.adresse_reverse_json(0.,0.);
+SELECT results_eq('baninfo_adresse_reverse','reverse_expected',
 	'La fonction reverse renvoi la valeur test de Addokk');
 
 PREPARE performance_adresse_search AS SELECT * FROM frapi.adresse_search('route des anges, landéda');
